@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6657d9">
+  <title>Les champions du calcul</title>
+  <style>
+    :root{--ink:#242344;--muted:#686780;--purple:#6657d9;--purple-dark:#5142c0;--mint:#dff8ed;--green:#16845c;--rose:#fff0ee;--red:#b44237;--paper:#fff;--line:#e7e5f1;--bg:#f5f3ff;--gold:#ffcf5c}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#e6ddff 0,transparent 48%),var(--bg);color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;min-height:100vh}
+    button,select{font:inherit}button{cursor:pointer}.wrap{width:min(760px,100% - 28px);margin:auto;padding:22px 0 36px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 20px}.brand{display:flex;align-items:center;gap:11px}.logo{width:48px;height:48px;border-radius:16px;background:var(--purple);display:grid;place-items:center;color:white;font-size:26px;box-shadow:0 5px 0 #4939b4}.brand h1{font-size:clamp(1.15rem,4vw,1.55rem);margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:.9rem}.stats{display:flex;gap:8px}.stat{background:white;border:1px solid var(--line);border-radius:14px;padding:8px 12px;text-align:center;min-width:75px}.stat b{display:block;font-size:1.1rem}.stat span{font-size:.72rem;color:var(--muted)}
+    .panel{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(18px,4vw,30px);box-shadow:0 12px 35px #33248312}.settings{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px}.settings label{font-weight:750}.select-wrap{display:flex;align-items:center;gap:9px}.select-wrap select{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 34px 10px 12px;color:var(--ink);font-weight:700}
+    .progress-row{display:flex;justify-content:space-between;color:var(--muted);font-size:.85rem;margin-bottom:8px}.track{height:9px;background:#eeedf5;border-radius:99px;overflow:hidden;margin-bottom:24px}.bar{height:100%;width:0;background:linear-gradient(90deg,#8b7af3,#59c9a1);border-radius:99px;transition:width .3s}
+    .question{text-align:center;padding:10px 0 22px}.eyebrow{text-transform:uppercase;letter-spacing:.1em;color:var(--purple);font-size:.75rem;font-weight:850}.equation{font-size:clamp(3.5rem,15vw,6.4rem);font-weight:900;letter-spacing:-.06em;line-height:1.15;margin:10px 0 4px}.equation .op{color:#9a91cc}.hint{color:var(--muted);margin:0}
+    .answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.answer{border:2px solid var(--line);border-radius:17px;background:#fff;padding:15px;font-size:clamp(1.4rem,5vw,1.8rem);font-weight:850;color:var(--ink);box-shadow:0 3px 0 #e9e7f2;transition:transform .12s,border-color .12s,background .12s}.answer:hover:not(:disabled){border-color:#a79cf0;transform:translateY(-2px)}.answer:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #ffbf47;outline-offset:3px}.answer:disabled{cursor:default}.answer.correct{background:var(--mint);border-color:#8ad8b8;color:var(--green);box-shadow:0 3px 0 #c4eddc}.answer.wrong{background:var(--rose);border-color:#f0b4ae;color:var(--red);box-shadow:0 3px 0 #f5d1cc}
+    .feedback{min-height:65px;text-align:center;padding:16px 4px 0;font-weight:750;font-size:1.05rem}.feedback.good{color:var(--green)}.feedback.try{color:var(--red)}.explain{display:block;color:var(--muted);font-size:.9rem;font-weight:500;margin-top:5px}.next{display:block;margin:0 auto;background:var(--purple);color:#fff;border:0;border-radius:14px;padding:13px 22px;font-weight:800;box-shadow:0 4px 0 var(--purple-dark)}.next:hover{background:var(--purple-dark)}.next:active{transform:translateY(2px);box-shadow:0 2px 0 var(--purple-dark)}.next[hidden]{display:none}
+    .footer{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:17px}.quiet{border:1px solid var(--line);background:white;color:var(--muted);border-radius:12px;padding:9px 13px;font-size:.88rem;font-weight:700}.quiet:hover{border-color:#bcb6e8;color:var(--purple)}
+    .modal{position:fixed;inset:0;background:#1d194b88;display:grid;place-items:center;padding:18px;z-index:2}.modal[hidden]{display:none}.dialog{max-width:440px;width:100%;text-align:center;background:white;border-radius:24px;padding:28px;box-shadow:0 18px 60px #16133c55}.dialog .trophy{font-size:3.4rem}.dialog h2{margin:6px 0}.dialog p{color:var(--muted);line-height:1.5}.dialog .next{margin-top:18px}
+    @media(max-width:540px){.wrap{padding-top:14px}.stats{gap:5px}.stat{min-width:60px;padding:7px 8px}.stat span{font-size:.65rem}.brand p{font-size:.78rem}.logo{width:42px;height:42px}.panel{border-radius:20px}.settings{align-items:flex-start}.select-wrap{width:100%}.select-wrap select{flex:1}.answer{padding:14px 8px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand"><div class="logo" aria-hidden="true">✖</div><div><h1>Les champions du calcul</h1><p>Les multiplications jusqu’à 100 !</p></div></div>
+      <div class="stats" aria-label="Ta progression"><div class="stat"><b id="score">0</b><span>points</span></div><div class="stat"><b id="streak">0</b><span>bonne série</span></div></div>
+    </header>
+    <main class="panel">
+      <div class="settings"><label for="mode">Choisis ton entraînement</label><div class="select-wrap"><span aria-hidden="true">📚</span><select id="mode"><option value="mix">Toutes les tables (1 à 10)</option><option value="1">Table de 1</option><option value="2">Table de 2</option><option value="3">Table de 3</option><option value="4">Table de 4</option><option value="5">Table de 5</option><option value="6">Table de 6</option><option value="7">Table de 7</option><option value="8">Table de 8</option><option value="9">Table de 9</option><option value="10">Table de 10</option></select></div></div>
+      <div class="progress-row"><span id="roundLabel">Question 1 sur 10</span><span id="roundScore">0 / 10</span></div><div class="track" role="progressbar" aria-label="Progression de la manche" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div class="bar" id="bar"></div></div>
+      <section class="question" aria-live="polite"><div class="eyebrow" id="tableTag">À toi de jouer !</div><div class="equation" aria-label="Calcul"><span id="a">?</span> <span class="op">×</span> <span id="b">?</span><span class="op">=</span><span>?</span></div><p class="hint">Choisis la bonne réponse</p></section>
+      <div class="answers" id="answers" role="group" aria-label="Réponses possibles"></div>
+      <div class="feedback" id="feedback" aria-live="polite"></div>
+      <button class="next" id="next" hidden>Question suivante →</button>
+    </main>
+    <div class="footer"><button class="quiet" id="newRound">↻ Nouvelle manche</button><button class="quiet" id="reset">Effacer ma progression</button></div>
+  </div>
+  <div class="modal" id="modal" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="endTitle"><div class="trophy">🏆</div><h2 id="endTitle">Manche terminée !</h2><p id="endText"></p><button class="next" id="again">Rejouer une manche</button></div></div>
+  <script>
+    (()=>{
+      const $=id=>document.getElementById(id), TOTAL=10, KEY='champions-multiplication-v1';
+      let saved={};try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch{}
+      let score=Number(saved.score)||0, best=Number(saved.best)||0, streak=0, round=0, correctRound=0, a=1,b=1,locked=false,previous='';
+      const mode=$('mode');
+      function save(){try{localStorage.setItem(KEY,JSON.stringify({score,best}))}catch{}}
+      function shuffle(list){for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]]}return list}
+      function makeChoices(answer){const set=new Set([answer]);while(set.size<4){let n;if(Math.random()<.48)n=answer+(Math.floor(Math.random()*9)-4);else n=1+Math.floor(Math.random()*100);if(n>=1&&n<=100)set.add(n)}return shuffle([...set])}
+      function updateProgress(){const pct=round/TOTAL*100;$('roundLabel').textContent=`Question ${Math.min(round+1,TOTAL)} sur ${TOTAL}`;$('roundScore').textContent=`${correctRound} / ${round}`;$('bar').style.width=`${pct}%`;document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow',round)}
+      function question(){locked=false;$('feedback').className='feedback';$('feedback').textContent='';$('next').hidden=true;
+        const selected=mode.value==='mix'?null:Number(mode.value);let attempts=0;
+        do{a=selected||1+Math.floor(Math.random()*10);b=1+Math.floor(Math.random()*10);attempts++}while(attempts<20&&`${a}x${b}`===previous);previous=`${a}x${b}`;
+        $('a').textContent=a;$('b').textContent=b;$('tableTag').textContent=selected?`Table de ${selected}`:'Toutes les tables';
+        const answers=$('answers');answers.replaceChildren();makeChoices(a*b).forEach(value=>{const button=document.createElement('button');button.className='answer';button.textContent=value;button.setAttribute('aria-label',`Répondre ${value}`);button.addEventListener('click',()=>answer(value,button));answers.appendChild(button)});updateProgress();answers.querySelector('button').focus({preventScroll:true})
+      }
+      function answer(value,button){if(locked)return;locked=true;const right=value===a*b;[...$('answers').children].forEach(el=>el.disabled=true);if(right){button.classList.add('correct');score++;streak++;correctRound++;$('feedback').className='feedback good';$('feedback').innerHTML=`Bravo ! C’est la bonne réponse 🌟<span class="explain">${a} groupes de ${b}, cela fait ${a*b}.</span>`}else{button.classList.add('wrong');streak=0;[...$('answers').children].find(el=>Number(el.textContent)===a*b)?.classList.add('correct');$('feedback').className='feedback try';$('feedback').innerHTML=`Presque ! La bonne réponse est ${a*b}.<span class="explain">${a} groupes de ${b}, cela fait ${a*b}. Essaie de le retenir !</span>`}
+        best=Math.max(best,streak);$('score').textContent=score;$('streak').textContent=streak;save();round++;$('roundScore').textContent=`${correctRound} / ${round}`;$('bar').style.width=`${round/TOTAL*100}%`;document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow',round);if(round>=TOTAL){$('next').hidden=false;$('next').textContent='Voir mon résultat →'}else{$('next').hidden=false;$('next').textContent='Question suivante →'}$('next').focus({preventScroll:true})
+      }
+      function next(){if(!locked)return;if(round>=TOTAL){$('endText').textContent=`Tu as trouvé ${correctRound} bonne${correctRound>1?'s':''} réponse${correctRound>1?'s':''} sur ${TOTAL}. ${score} points au total !`; $('modal').hidden=false;$('again').focus();return}question()}
+      function newRound(){round=0;correctRound=0;previous='';$('modal').hidden=true;question()}
+      mode.addEventListener('change',newRound);$('next').addEventListener('click',next);$('newRound').addEventListener('click',newRound);$('again').addEventListener('click',newRound);$('reset').addEventListener('click',()=>{if(confirm('Effacer ton score et recommencer ?')){score=0;best=0;streak=0;save();$('score').textContent=score;$('streak').textContent=streak;newRound()}});
+      document.addEventListener('keydown',event=>{if($('modal').hidden&&locked&&event.key==='Enter')next()});question();
+    })();
+  </script>
+</body>
+</html>
